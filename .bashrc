@@ -5,13 +5,6 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-source /usr/share/git/completion/git-prompt.sh
-
-emoji=("🐧" "👽" '🎃' '💤' '🌋' '🔚' "🤔")
-e_num=$(($RANDOM % ${#emoji[*]}))
-# PS1='\[\033[00;36m\]\u\[\033[00m\]@\[\033[00;36m\]\h\[\033[00m\]:\[\033[00;32m\]\w\[\033[00m\]\ $' 
-PS1='┬─\[\033[00;35m\]\u\[\033[00m\] \[\033[00;34m\]\t \[\033[00;36m\]\w$(__git_ps1 " (%s)")\[\033[00m\] ${emoji[$e_num]}\n╰─>>> ' 
-
 shopt -s autocd
 shopt -s checkwinsize
 
@@ -24,19 +17,25 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 alias pypy='pypy3'
+alias python='python3'
 alias grep='grep --color=auto'
 alias doco='docker-compose'
 alias vbm='vboxmanage'
-alias bashrc='nvim $HOME/.bashrc'
-alias v='nvim'
+alias bashrc='vim $HOME/.bashrc'
+alias v='vim'
 alias emacs='emacs -nw'
-#alias vim='nvim'
-alias vimrc='nvim ~/.config/nvim/init.vim'
+alias vimrc='vim ~/.config/nvim/init.vim'
 alias copy='xsel --clipboard --input'
 alias gpp='g++'
 alias sl='ls'
 alias chmod='chmod --preserve-root'
 alias chown='chown --preserve-root'
+if type batcat &> /dev/null; then
+  alias bat='batcat'
+fi
+if type fdfind &> /dev/null; then
+  alias fd='fdfind'
+fi
 
 htdocs='/opt/lampp/htdocs'
 
@@ -51,4 +50,18 @@ htdocs='/opt/lampp/htdocs'
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /home/ykyng/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /home/ykyng/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
 
+emoji=("🐧" "👽" '🎃' '💤' '🌋' '🔚' "🤔")
+e_num=$(($RANDOM % ${#emoji[*]}))
 
+PS1='┬─\[\033[01;32m\]\u\[\033[00m\] \[\033[00;33m\]\t \[\033[01;34m\]\w$(__git_ps1 " (%s)")\[\033[00m\] ${emoji[$e_num]}\n╰─>>> '
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  elif [ -f /usr/share/git/completion/git-prompt.sh ]; then
+    . /usr/share/git/completion/git-prompt.sh
+  else
+    PS1='┬─\[\033[00;35m\]\u\[\033[00m\] \[\033[00;34m\]\t \[\033[00;36m\]\w\[\033[00m\] ${emoji[$e_num]}\n╰─>>> '
+  fi
+fi
