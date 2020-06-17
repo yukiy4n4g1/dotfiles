@@ -1,5 +1,4 @@
 set number
-set relativenumber
 set title
 
 set fileencoding=utf-8
@@ -53,21 +52,21 @@ nnoremap <Leader>K <C-w>K
 nnoremap <Leader>L <C-w>L
 nmap <Leader>ft :NERDTreeToggle<CR>
 
-" Plugin Setting
-" go
+if (filereadable(expand('~/.vim/autoload/plug.vim')))
+    " Plugin Setting
+    call plug#begin('~/.vim/plugged')
 
-call plug#begin('~/.vim/plugged')
+    " Plug 'scrooloose/nerdtree'
+    Plug 'sheerun/vim-polyglot'
 
-Plug 'scrooloose/nerdtree'
-Plug 'sheerun/vim-polyglot'
+    " colorscheme
+    " Plug 'morhetz/gruvbox'
+    " Plug 'jacoborus/tender.vim'
+    " Plug 'nanotech/jellybeans.vim'
+    Plug 'joshdick/onedark.vim'
 
-" colorscheme
-Plug 'morhetz/gruvbox'
-Plug 'jacoborus/tender.vim'
-Plug 'nanotech/jellybeans.vim'
-Plug 'joshdick/onedark.vim'
-
-call plug#end()
+    call plug#end()
+endif
 
 if (has("termguicolors"))
  set termguicolors
@@ -75,5 +74,5 @@ endif
 
 " For Neovim 0.1.3 and 0.1.4
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme onedark
+colorscheme desert
 " let g:onedark_termcolors=256
