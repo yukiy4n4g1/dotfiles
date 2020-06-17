@@ -28,6 +28,8 @@ set $ws20 "20"
 bindsym $mod+Return exec --no-startup-id $term
 bindsym $mod+Shift+space exec $browser
 
+bindsym $mod+space exec --no-startup-id "rofi -show drun -modi drun,window,run"
+
 bindsym $mod+Left   focus left
 bindsym $mod+Down   focus down
 bindsym $mod+Up     focus up
@@ -64,6 +66,27 @@ bindsym $mod+Ctrl+Shift+Left    move workspace to output left
 bindsym $mod+Ctrl+Shift+Down    move workspace to output down
 bindsym $mod+Ctrl+Shift+Up      move workspace to output up
 bindsym $mod+Ctrl+Shift+Right   move workspace to output right
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+10 workspace $ws10
+bindsym $mod+11 workspace $ws11
+bindsym $mod+12 workspace $ws12
+bindsym $mod+13 workspace $ws13
+bindsym $mod+14 workspace $ws14
+bindsym $mod+15 workspace $ws15
+bindsym $mod+16 workspace $ws16
+bindsym $mod+17 workspace $ws17
+bindsym $mod+18 workspace $ws18
+bindsym $mod+19 workspace $ws19
+bindsym $mod+20 workspace $ws20
 
 bindsym $mod+shift+1 move container to workspace number $ws1
 bindsym $mod+shift+2 move container to workspace number $ws2
