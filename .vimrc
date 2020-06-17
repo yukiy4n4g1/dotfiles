@@ -50,13 +50,16 @@ nnoremap <Leader>H <C-w>H
 nnoremap <Leader>J <C-w>J
 nnoremap <Leader>K <C-w>K
 nnoremap <Leader>L <C-w>L
-nmap <Leader>ft :NERDTreeToggle<CR>
+
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+
+if (has("termguicolors"))
+ set termguicolors
+endif
 
 if (filereadable(expand('~/.vim/autoload/plug.vim')))
-    " Plugin Setting
     call plug#begin('~/.vim/plugged')
 
-    " Plug 'scrooloose/nerdtree'
     Plug 'sheerun/vim-polyglot'
 
     " colorscheme
@@ -68,11 +71,9 @@ if (filereadable(expand('~/.vim/autoload/plug.vim')))
     call plug#end()
 endif
 
-if (has("termguicolors"))
- set termguicolors
-endif
-
-" For Neovim 0.1.3 and 0.1.4
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-colorscheme desert
-" let g:onedark_termcolors=256
+try
+    colorscheme onedark
+    let g:onedark_termcolors=256
+catch /^Vim\%((\a\+)\)\=:E185/
+    colorscheme desert
+endtry

@@ -50,17 +50,17 @@ htdocs='/opt/lampp/htdocs'
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /home/ykyng/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /home/ykyng/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
 
-emoji=("🐧" "👽" '🎃' '💤' '🌋' '🔚' "🤔")
+emoji=("🐧" "👽" "🎃" "💤" "🌋" "🔚" "🤔")
 e_num=$(($RANDOM % ${#emoji[*]}))
 
 PS1='┬─\[\033[01;32m\]\u\[\033[00m\] \[\033[00;33m\]\t \[\033[01;34m\]\w$(__git_ps1 " (%s)")\[\033[00m\] ${emoji[$e_num]}\n╰─>>> '
 if ! shopt -oq posix; then
-  if [ -f /usr/share/bash-completion/bash_completion ]; then
+  if [ -f /usr/share/git/completion/git-prompt.sh ]; then
+    . /usr/share/git/completion/git-prompt.sh
+  elif [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-  elif [ -f /usr/share/git/completion/git-prompt.sh ]; then
-    . /usr/share/git/completion/git-prompt.sh
   else
     PS1='┬─\[\033[00;35m\]\u\[\033[00m\] \[\033[00;34m\]\t \[\033[00;36m\]\w\[\033[00m\] ${emoji[$e_num]}\n╰─>>> '
   fi
