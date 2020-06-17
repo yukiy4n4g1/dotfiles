@@ -2,6 +2,9 @@ set number
 set relativenumber
 set title
 
+set fileencoding=utf-8
+set encoding=utf-8
+
 syntax on
 
 set tabstop=4
@@ -10,7 +13,6 @@ set shiftwidth=4
 set softtabstop=4
 set autoindent
 set smartindent
-
 set smartcase
 set wildmenu
 set clipboard=unnamedplus
