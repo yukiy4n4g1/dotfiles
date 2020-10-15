@@ -1,6 +1,9 @@
 /*
 /.**
 
+!/bin
+!/bin/**
+
 !/.profile
 !/.bashrc
 !/.bash_profile

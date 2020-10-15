@@ -35,17 +35,7 @@ bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
 bindsym $mod+9 workspace $ws9
-bindsym $mod+10 workspace $ws10
-bindsym $mod+11 workspace $ws11
-bindsym $mod+12 workspace $ws12
-bindsym $mod+13 workspace $ws13
-bindsym $mod+14 workspace $ws14
-bindsym $mod+15 workspace $ws15
-bindsym $mod+16 workspace $ws16
-bindsym $mod+17 workspace $ws17
-bindsym $mod+18 workspace $ws18
-bindsym $mod+19 workspace $ws19
-bindsym $mod+20 workspace $ws20
+bindsym $mod+0 workspace $ws10
 
 bindsym $mod+shift+1 move container to workspace number $ws1
 bindsym $mod+shift+2 move container to workspace number $ws2
@@ -138,9 +128,10 @@ hide_edge_borders smart
 default_border pixel 1
 default_floating_border pixel 1
 
-gaps inner 0 
-gaps outer 0
+# gaps inner 14 
+# gaps outer -2 
 smart_gaps on
+smart_borders on
 
 popup_during_fullscreen smart
 
@@ -162,7 +153,6 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 bindsym $mod+Shift+q    kill
-bindsym $mod+Delete     kill
 bindsym $mod+Control+q  kill
 
 ####################
@@ -183,26 +173,75 @@ bindsym XF86AudioLowerVolume  exec --no-startup-id "pactl set-sink-mute 0 false 
 bindsym XF86AudioRaiseVolume  exec --no-startup-id "pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +1%"
 bindsym XF86AudioMicMute      exec --no-startup-id pactl set-source-mute 1 toggle
 
-bindsym XF86MonBrightnessDown exec --no-startup-id light -U 5
-bindsym XF86MonBrightnessUp   exec --no-startup-id light -A 5
+bindsym XF86MonBrightnessUp exec --no-startup-id ~/dotfiles/bin/backlight.sh up
+bindsym XF86MonBrightnessDown exec --no-startup-id ~/dotfiles/bin/backlight.sh down
 
 ############################
 ### Startup Applications ###
 ############################
+
+exec fcitx-autostart
+
+exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id nitrogen --restore; sleep 1; compton -b
+exec --no-startup-id xfce4-power-manager
+exec --no-startup-id pamac-tray
+exec --no-startup-id clipit
+# exec --no-startup-id blueman-applet
+# exec_always --no-startup-id sbxkb
+exec --no-startup-id conky -c /usr/share/conky/conky_maia
+# exec --no-startup-id start_conky_green
+exec --no-startup-id xautolock -time 10 -locker blurlock
+exec_always --no-startup-id fix_xcursor
 
 exec --no-startup-id feh --bg-center /usr/share/backgrounds/archlinux/archlinux-simplyblack.png
 exec --no-startup-id nm-applet
 
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
+####################
+### Bar Settings ###
+####################
+
+bar {
+        i3bar_command i3bar
+        status_command i3status
+        position bottom
+
+## please set your primary output first. Example: 'xrandr --output eDP1 --primary'
+#       tray_output primary
+#       tray_output eDP1
+
+        bindsym button4 nop
+        bindsym button5 nop
+    font xft:URWGothic-Book 11
+        strip_workspace_numbers yes
+
+    colors {
+        background #222D31
+        statusline #F9FAF9
+        separator  #454947
+
+#                          border  backgr  text
+        focused_workspace  #F9FAF9 #16a085 #292F34
+        active_workspace   #595B5B #353836 #FDF6E3
+        inactive_workspace #595B5B #222D31 #EEE8D5
+        binding_mode       #16a085 #2C2C2C #F9FAF9
+        urgent_workspace   #16a085 #FDF6E3 #E5201D
+    }
+}
+
 ######################
 ### Color Settings ###
 ######################
 
-client.focused          #5294e2 #383d4a #d3dae3 #5294e2   #5294e2
-client.focused_inactive #6a6f77 #383d4a #aab0bf #484e50
-client.unfocused        #6a6f77 #383d4a #aab0bf #292d2e
-client.urgent           #be545a #be545a #d3dae3 #900000
+client.focused          #556064 #556064 #80FFF9 #FDF6E3
+client.focused_inactive #2F3D44 #2F3D44 #1ABC9C #454948
+client.unfocused        #2F3D44 #2F3D44 #1ABC9C #454948
+client.urgent           #CB4B16 #FDF6E3 #1ABC9C #268BD2
+client.placeholder      #000000 #0c0c0c #ffffff #000000 
+
+client.background       #2B2C2B
 
 #####################
 ### Mode Settings ###
@@ -259,7 +298,6 @@ bindsym $mod+r mode "Resize Mode"
 mode "RUN" {
         bindsym f exec --no-startup-id "firefox & i3-msg 'mode default'"
         bindsym d exec --no-startup-id "/usr/local/bin/Discord/Discord & i3-msg 'mode default'"
-
         bindsym t exec --no-startup-id "thunar & i3-msg 'mode default'"
         bindsym s exec --no-startup-id "slack & i3-msg 'mode default'"
         bindsym c exec --no-startup-id "code & i3-msg 'mode default'"
@@ -267,7 +305,7 @@ mode "RUN" {
         bindsym n exec --no-startup-id "nm-connection-editor & i3-msg 'mode default'"
         bindsym l exec --no-startup-id "leafpad & i3-msg 'mode default'"
         bindsym a exec --no-startup-id "arandr & i3-msg 'mode default'"
-        bindsym p exec --no-startup-id "xfce4-screenshooter & i3-msg 'mode default'"
+        bindsym p exec --no-startup-id "pcmanfm & i3-msg 'mode default'"
 
         bindsym Return          mode "default"
         bindsym Escape          mode "default"
@@ -285,3 +323,14 @@ mode "POWER" {
         bindsym $mod+Shift+p    mode "default"
 }
 bindsym $mod+Shift+p mode "POWER"
+
+mode "MOVE FOCUS" {
+    bindsym f       [class="firefox"] focus; mode default
+    bindsym c       [class="code-oss"] focus; mode default
+    bindsym Return  [class="Termite"];mode "default"
+
+    bindsym space           mode "default"
+    bindsym Escape          mode "default"
+    bindsym $mod+m          mode "default"
+}
+bindsym $mod+m mode "MOVE FOCUS"
