@@ -10,9 +10,9 @@ shopt -s checkwinsize
 
 stty stop undef
 
-alias ls='ls --color=auto'
-alias ll='ls -alF'
-alias la='ls -A'
+set bell-style none
+
+
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -24,7 +24,7 @@ alias vbm='vboxmanage'
 alias bashrc='vim $HOME/.bashrc'
 alias v='vim'
 alias emacs='emacs -nw'
-alias vimrc='vim ~/.config/nvim/init.vim'
+alias vimrc='vim ~/.vimrc'
 alias copy='xsel --clipboard --input'
 alias gpp='g++'
 alias sl='ls'
@@ -36,8 +36,21 @@ fi
 if type fdfind &> /dev/null; then
   alias fd='fdfind'
 fi
+if type exa &> /dev/null; then
+  alias ls='exa --group-directories-first'
+  alias la='exa --group-directories-first -a'
+  alias ll='exa -hal --git --time-style=long-iso --group-directories-first'
+else
+  alias ls='ls --color=auto'
+  alias ll='ls -alF'
+  alias la='ls -A' 
+fi
 
-htdocs='/opt/lampp/htdocs'
+nr () {
+  filename="$(echo $1 | sed 's/\.[^\.]*$//')"
+  nim c -r --hints:off $1
+  [ -f $filename ] && rm -f $filename
+}
 
 
 # tabtab source for serverless package
@@ -49,6 +62,9 @@ htdocs='/opt/lampp/htdocs'
 # tabtab source for slss package
 # uninstall by removing these lines or running `tabtab uninstall slss`
 [ -f /home/ykyng/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /home/ykyng/.nvm/versions/node/v10.15.3/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
+
+[ -f /usr/share/fzf/completion.bash ] && . /usr/share/fzf/completion.bash
+[ -f /usr/share/fzf/key-bindings.bash ] && . /usr/share/fzf/key-bindings.bash
 
 emoji=("🐧" "👽" "🎃" "💤" "🌋" "🔚" "🤔")
 e_num=$(($RANDOM % ${#emoji[*]}))

@@ -15,18 +15,17 @@ set smartindent
 set smartcase
 set wildmenu
 set clipboard=unnamedplus
+set belloff=all
 
 " keybind
-" inoremap <silent> jj <esc>
 inoremap <silent> jk <esc>
 noremap <C-j> gT
 noremap <C-k> gt
 noremap j gj
 noremap k gk
-noremap J 10<Down>
-noremap K 10<Up>
-noremap H 10<Left>
-noremap L 10<Right>
+noremap x "_x
+noremap + <C-a>
+noremap - <C-x>
 
 "" move line/word
 noremap <C-e> $
@@ -35,8 +34,6 @@ noremap <C-f> l
 noremap <C-b> h
 inoremap <C-e> <C-o>$
 inoremap <C-a> <C-o>0
-inoremap <C-f> <right>
-inoremap <C-b> <left>
 
 let mapleader = "\<Space>"
 nnoremap <Leader>w :w<CR>
@@ -54,7 +51,7 @@ nnoremap <Leader>L <C-w>L
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 if (has("termguicolors"))
- set termguicolors
+    set termguicolors
 endif
 
 if (filereadable(expand('~/.vim/autoload/plug.vim')))
