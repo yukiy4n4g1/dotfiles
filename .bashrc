@@ -58,6 +58,9 @@ nr () {
 [ -f /usr/share/fzf/completion.bash ] && . /usr/share/fzf/completion.bash
 [ -f /usr/share/fzf/key-bindings.bash ] && . /usr/share/fzf/key-bindings.bash
 
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 emoji=("🐧" "👽" "🎃" "💤" "🌋" "🔚" "🤔")
 e_num=$(($RANDOM % ${#emoji[*]}))
 

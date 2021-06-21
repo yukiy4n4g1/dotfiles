@@ -26,6 +26,9 @@ noremap k gk
 noremap x "_x
 noremap + <C-a>
 noremap - <C-x>
+nnoremap <C-n> :nohl
+vnoremap < <gv
+vnoremap > >gv
 
 "" move line/word
 noremap <C-e> $
