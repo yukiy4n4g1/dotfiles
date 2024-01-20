@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 cd $(dirname "$0") || exit
 
@@ -10,7 +10,7 @@ cd $(dirname "$0") || exit
         [ "$f" = ".gitignore" ] && continue
         [ "$f" = ".DS_Store" ] && continue
 
-        ln -sfnv "$f" "$HOME"/"$f"
+        ln -sfnv "$PWD"/"$f" "$HOME"/"$f"
     done
     
 )
