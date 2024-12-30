@@ -14,7 +14,7 @@ set autoindent
 set smartindent
 set smartcase
 set wildmenu
-set clipboard=unnamedplus
+set clipboard=unnamed
 set belloff=all
 
 " keybind
